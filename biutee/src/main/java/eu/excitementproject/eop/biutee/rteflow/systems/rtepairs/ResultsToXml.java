@@ -27,18 +27,12 @@ import eu.excitementproject.eop.transformations.utilities.TeEngineMlException;
  */
 public class ResultsToXml
 {
-	public static class ScoreAndRTEClassificationType
-	{
-		public ScoreAndRTEClassificationType(double score,RTEClassificationType classification)
-		{this.score = score;this.classification = classification;}
-		
-		public double getScore(){return score;}
-		public RTEClassificationType getClassification(){return classification;}
-
-		private final double score;
-		private final RTEClassificationType classification;
-	}
-	
+	public static final String ROOT_ELEMENT_NAME = "results";
+	public static final String PAIR_ELEMENT_NAME = "pair";
+	public static final String ID_ATTRIBUTE_NAME = "id";
+	public static final String ENTAILMENT_ATTIRUBTE_NAME = "entailment";
+	public static final String SCORE_ATTRIBUTE_NAME = "score";
+			
 	public static Map<String, ScoreAndRTEClassificationType> convertPairResults(Map<ExtendedPairData, PairResult> pairsResults, Classifier classifier) throws ClassifierException
 	{
 		Map<String, ScoreAndRTEClassificationType> ret = new LinkedHashMap<String, ScoreAndRTEClassificationType>();
@@ -76,14 +70,14 @@ public class ResultsToXml
 	private Document createXmlDocumentOfResults() throws ParserConfigurationException
 	{
 		Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-		Element rootElement = document.createElement("results");
+		Element rootElement = document.createElement(ROOT_ELEMENT_NAME);
 		document.appendChild(rootElement);
 		for (Map.Entry<String, ScoreAndRTEClassificationType> result : results.entrySet())
 		{
-			Element pairElement = document.createElement("pair");
-			pairElement.setAttribute("id", result.getKey());
-			pairElement.setAttribute("entailment", result.getValue().getClassification().name());
-			pairElement.setAttribute("score", String.valueOf(result.getValue().getScore()));
+			Element pairElement = document.createElement(PAIR_ELEMENT_NAME);
+			pairElement.setAttribute(ID_ATTRIBUTE_NAME, result.getKey());
+			pairElement.setAttribute(ENTAILMENT_ATTIRUBTE_NAME, result.getValue().getClassification().name());
+			pairElement.setAttribute(SCORE_ATTRIBUTE_NAME, String.valueOf(result.getValue().getScore()));
 			rootElement.appendChild(pairElement);
 		}
 		return document;

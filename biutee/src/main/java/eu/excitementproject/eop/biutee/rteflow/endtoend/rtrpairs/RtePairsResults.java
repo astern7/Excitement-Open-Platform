@@ -10,7 +10,7 @@ import eu.excitementproject.eop.biutee.rteflow.endtoend.InstanceAndProof;
 import eu.excitementproject.eop.biutee.rteflow.endtoend.default_impl.DefaultAbstractResults;
 import eu.excitementproject.eop.biutee.rteflow.endtoend.default_impl.InstanceAndProofAndClassification;
 import eu.excitementproject.eop.biutee.rteflow.systems.rtepairs.ResultsToXml;
-import eu.excitementproject.eop.biutee.rteflow.systems.rtepairs.ResultsToXml.ScoreAndRTEClassificationType;
+import eu.excitementproject.eop.biutee.rteflow.systems.rtepairs.ScoreAndRTEClassificationType;
 import eu.excitementproject.eop.biutee.utilities.BiuteeException;
 import eu.excitementproject.eop.common.utilities.datasets.rtepairs.RTEClassificationType;
 import eu.excitementproject.eop.transformations.utilities.TeEngineMlException;
