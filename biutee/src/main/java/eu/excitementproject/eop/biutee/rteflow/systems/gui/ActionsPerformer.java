@@ -56,6 +56,7 @@ import eu.excitementproject.eop.biutee.rteflow.systems.rtepairs.ExtendedPairData
 import eu.excitementproject.eop.biutee.rteflow.systems.rtepairs.PairProcessor;
 import eu.excitementproject.eop.biutee.rteflow.systems.rtesum.preprocess.ExtendedPreprocessedTopicDataSet;
 import eu.excitementproject.eop.biutee.script.ScriptException;
+import eu.excitementproject.eop.biutee.utilities.BiuteeConstants;
 import eu.excitementproject.eop.biutee.utilities.ProgressFire;
 import eu.excitementproject.eop.biutee.utilities.ShortMessageFire;
 import eu.excitementproject.eop.common.datastructures.immutable.ImmutableList;
@@ -201,6 +202,7 @@ public class ActionsPerformer implements ActionListener, ChangeListener, ItemLis
 		
 	}
 
+	
 	/**
 	 * Handles all button-clicks of Visual-Tracing-Tool, and some of the menu-items
 	 */
@@ -223,7 +225,7 @@ public class ActionsPerformer implements ActionListener, ChangeListener, ItemLis
 				boolean doIt = true;
 				if (this.useF1Classifier!=null)
 				{
-					if (this.cpe.getSumUtilities().isSumDatasetSentenceSelected() && (!this.useF1Classifier.booleanValue()))
+					if (is((this.cpe.getSumUtilities().isSumDatasetSentenceSelected() && (!this.useF1Classifier.booleanValue()) && BiuteeConstants.GUI_LOADS_LABELED_SAMPLES)))
 					{
 						int answer = JOptionPane.showConfirmDialog(cpe.getMainFrame(),WARNING_SUM_BUT_NO_F1, "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null);
 						if (JOptionPane.YES_OPTION!=answer)
@@ -1888,6 +1890,11 @@ public class ActionsPerformer implements ActionListener, ChangeListener, ItemLis
 		}
 		return sb.toString();
 	}
+	
+	/**
+	 * Used to prevent dead-code warnings
+	 */
+	private static final boolean is(boolean b) {return b;}
 	
 
 	private VisualTracingTool cpe;
