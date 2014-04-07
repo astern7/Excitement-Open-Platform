@@ -2,11 +2,14 @@ package eu.excitementproject.eop.biutee.utilities;
 
 import java.io.File;
 
+import org.apache.log4j.Logger;
+
 import eu.excitementproject.eop.biutee.rteflow.systems.SystemInitialization;
 import eu.excitementproject.eop.common.utilities.ExperimentManager;
 import eu.excitementproject.eop.common.utilities.configuration.ConfigurationException;
 import eu.excitementproject.eop.common.utilities.configuration.ConfigurationFile;
 import eu.excitementproject.eop.common.utilities.configuration.ConfigurationParams;
+import eu.excitementproject.eop.transformations.utilities.GlobalMessages;
 
 /**
  * A class used for some internal experiments in BIU. It can be ignored.
@@ -36,6 +39,7 @@ public class HiddenConfigurationProvider
 							ConfigurationFile configurationFile = SystemInitialization.loadConfigurationFile(file.getPath());
 							ConfigurationParams params = configurationFile.getModuleConfiguration(HIDDEN_MODULE_NAME);
 							ExperimentManager.getInstance().register(file);
+							GlobalMessages.globalWarn("System is manipulated by hidden parameters. If you are not aware of these hidden parameters, consider the output as flawed", logger);
 							hiddenParams = params;
 						}
 					}
@@ -52,4 +56,5 @@ public class HiddenConfigurationProvider
 	private static boolean existenceChecked = false;
 	private static ConfigurationParams hiddenParams = null;
 
+	private static final Logger logger = Logger.getLogger(HiddenConfigurationProvider.class);
 }
