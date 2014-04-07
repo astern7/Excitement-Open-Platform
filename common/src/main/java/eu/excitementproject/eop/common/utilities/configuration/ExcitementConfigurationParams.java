@@ -110,7 +110,7 @@ public class ExcitementConfigurationParams extends AbstractConfigurationParams
 		{
 			stringSection = "Section: "+sectionName;
 		}
-		return stringConfigurationFile+stringSection;
+		return stringConfigurationFile+", "+stringSection;
 	}
 	
 	
