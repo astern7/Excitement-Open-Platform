@@ -39,7 +39,7 @@ public class HiddenConfigurationProvider
 							ConfigurationFile configurationFile = SystemInitialization.loadConfigurationFile(file.getPath());
 							ConfigurationParams params = configurationFile.getModuleConfiguration(HIDDEN_MODULE_NAME);
 							ExperimentManager.getInstance().register(file);
-							GlobalMessages.globalWarn("System is manipulated by hidden parameters. If you are not aware of these hidden parameters, consider the output as flawed", logger);
+							GlobalMessages.globalWarn("System is manipulated by hidden parameters. If you are not aware of these hidden parameters, consider the output as flawed.", logger);
 							hiddenParams = params;
 						}
 					}

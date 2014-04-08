@@ -381,16 +381,21 @@ public class AStarAlgorithm<T extends Comparable<T>>
 			}
 			for (T currentBestState : currentBestStates)
 			{
-//				if (logger.isDebugEnabled())
-//				{
-//					AStarElement ase = (AStarElement)currentBestState;
-//					String lastSpecDesc = "-";
-//					if (ase.getHistory().getSpecifications().size()>0)
-//					{
-//						lastSpecDesc = ase.getHistory().getSpecifications().get(ase.getHistory().getSpecifications().size()-1).toString();
-//					}
-//					logger.debug(lastSpecDesc);
-//				}
+				if (logger.isDebugEnabled())
+				{
+					AStarElement ase = (AStarElement)currentBestState;
+					String lastSpecDesc = "-";
+					if (ase.getHistory().getSpecifications().size()>0)
+					{
+						lastSpecDesc = ase.getHistory().getSpecifications().get(ase.getHistory().getSpecifications().size()-1).toString();
+					}
+					logger.debug(lastSpecDesc);
+				}
+				if (logger.isDebugEnabled())
+				{
+					AStarElement ase = (AStarElement)currentBestState;
+					logger.debug(String.format("future: %-3.3f\ncost: %-3.3f",ase.getFutureEstimation(),ase.getCost()));
+				}
 
 				++numberOfExpandedElements;
 				closedSet.add(currentBestState);

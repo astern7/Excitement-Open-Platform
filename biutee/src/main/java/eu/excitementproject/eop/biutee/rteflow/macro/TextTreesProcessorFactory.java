@@ -103,13 +103,22 @@ public class TextTreesProcessorFactory
 					String searchAlgorithmName = hiddenParams.get(HIDDEN_PARAMETER_SEARCH_ALGORITHM);
 					logger.info("Using search algorithm \""+searchAlgorithmName+"\"");
 					
-					if ("weighted-A*".equals(searchAlgorithmName))
+					if ("weighted-A*-train-and-test".equals(searchAlgorithmName))
 					{
 						AStarTextTreesProcessor aStarTextTreesProcessor = new AStarTextTreesProcessor(textText,hypothesisText,
 								originalTextTrees,hypothesisTree,originalMapTreesToSentences,
 								coreferenceInformation,classifier,lemmatizer, script,
 								teSystemEnvironment);
-						aStarTextTreesProcessor.setWeightOfCost(6.0);
+						aStarTextTreesProcessor.setWeightOfFuture(30.0);
+						ret=aStarTextTreesProcessor;
+					}
+					if ("weighted-A*-test-only".equals(searchAlgorithmName))
+					{
+						AStarTextTreesProcessor aStarTextTreesProcessor = new AStarTextTreesProcessor(textText,hypothesisText,
+								originalTextTrees,hypothesisTree,originalMapTreesToSentences,
+								coreferenceInformation,classifier,lemmatizer, script,
+								teSystemEnvironment);
+						aStarTextTreesProcessor.setWeightOfFuture(6.0);
 						ret=aStarTextTreesProcessor;
 					}
 					else if ("dovetaling-WA*".equals(searchAlgorithmName))
@@ -131,8 +140,9 @@ public class TextTreesProcessorFactory
 								coreferenceInformation,classifier,lemmatizer, script,
 								teSystemEnvironment,
 								1,1,0,
-								6.0, // "w": weight of cost, set to 6.
-								1.0);
+								1.0, 
+								6.0 // "w": weight of future, set to 6.
+								);
 						kStagedTextTreesProcessor.setkStagedDiscardExpandedStates(true);
 						kStagedTextTreesProcessor.setSeparatelyProcessTextSentencesMode(true);
 						ret = kStagedTextTreesProcessor;
