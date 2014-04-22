@@ -8,7 +8,6 @@ import eu.excitementproject.eop.biutee.rteflow.endtoend.Prover;
 import eu.excitementproject.eop.biutee.rteflow.endtoend.TimeStatistics;
 import eu.excitementproject.eop.biutee.rteflow.endtoend.default_impl.DefaultProver;
 import eu.excitementproject.eop.biutee.rteflow.macro.GlobalPairInformation;
-import eu.excitementproject.eop.biutee.rteflow.macro.TextTreesProcessorFactory;
 import eu.excitementproject.eop.biutee.rteflow.macro.search.WithStatisticsTextTreesProcessor;
 import eu.excitementproject.eop.biutee.rteflow.systems.TESystemEnvironment;
 import eu.excitementproject.eop.biutee.rteflow.systems.rtepairs.ExtendedPairData;
@@ -103,7 +102,7 @@ public class RtePairsProver extends DefaultProver<THPairInstance, THPairProof>
 //				classifierForSearch, getLemmatizer(), script, teSystemEnvironment
 //				);
 		
-		WithStatisticsTextTreesProcessor processor = TextTreesProcessorFactory.createProcessor(pairData.getPair().getText(), pairData.getPair().getHypothesis(),
+		WithStatisticsTextTreesProcessor processor = teSystemEnvironment.getTextTreesProcessorFactory().createProcessor(pairData.getPair().getText(), pairData.getPair().getHypothesis(),
 				pairData.getTextTrees(), pairData.getHypothesisTree(),
 				pairData.getMapTreesToSentences(), pairData.getCoreferenceInformation(),
 				classifierForSearch, getLemmatizer(), script, teSystemEnvironment);

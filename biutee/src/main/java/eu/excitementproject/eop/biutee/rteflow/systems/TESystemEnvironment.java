@@ -4,6 +4,7 @@ import java.util.Set;
 
 import eu.excitementproject.eop.biutee.classifiers.ClassifierFactory;
 import eu.excitementproject.eop.biutee.plugin.PluginRegistry;
+import eu.excitementproject.eop.biutee.rteflow.macro.TextTreesProcessorFactory;
 import eu.excitementproject.eop.biutee.rteflow.macro.gap.GapToolBox;
 import eu.excitementproject.eop.common.datastructures.immutable.ImmutableSet;
 import eu.excitementproject.eop.core.component.syntacticknowledge.utilities.PARSER;
@@ -33,7 +34,8 @@ public class TESystemEnvironment
 			ImmutableSet<String> stopWords,
 			PARSER parser, boolean collapseMode,
 			GapToolBox<ExtendedInfo, ExtendedNode> gapToolBox,
-			ClassifierFactory classifierFactory)
+			ClassifierFactory classifierFactory,
+			TextTreesProcessorFactory textTreesProcessorFactory)
 	{
 		super();
 		this.ruleBasesToRetrieveMultiWords = ruleBasesToRetrieveMultiWords;
@@ -47,6 +49,7 @@ public class TESystemEnvironment
 		this.collapseMode = collapseMode;
 		this.gapToolBox = gapToolBox;
 		this.classifierFactory = classifierFactory;
+		this.textTreesProcessorFactory = textTreesProcessorFactory;
 	}
 	
 	
@@ -95,6 +98,11 @@ public class TESystemEnvironment
 	{
 		return classifierFactory;
 	}
+	public TextTreesProcessorFactory getTextTreesProcessorFactory()
+	{
+		return textTreesProcessorFactory;
+	}
+
 
 
 
@@ -118,4 +126,5 @@ public class TESystemEnvironment
 	private final boolean collapseMode;
 	private final GapToolBox<ExtendedInfo, ExtendedNode> gapToolBox;
 	private final ClassifierFactory classifierFactory;
+	private final TextTreesProcessorFactory textTreesProcessorFactory;
 }

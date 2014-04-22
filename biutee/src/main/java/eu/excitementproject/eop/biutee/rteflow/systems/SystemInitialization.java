@@ -17,6 +17,7 @@ import eu.excitementproject.eop.biutee.plugin.PluginAdministrationException;
 import eu.excitementproject.eop.biutee.plugin.PluginException;
 import eu.excitementproject.eop.biutee.plugin.PluginRegisterer;
 import eu.excitementproject.eop.biutee.plugin.PluginRegistry;
+import eu.excitementproject.eop.biutee.rteflow.macro.TextTreesProcessorFactory;
 import eu.excitementproject.eop.biutee.rteflow.macro.gap.GapException;
 import eu.excitementproject.eop.biutee.rteflow.macro.gap.GapToolBox;
 import eu.excitementproject.eop.biutee.rteflow.macro.gap.GapToolBoxFactory;
@@ -197,7 +198,9 @@ public class SystemInitialization
 		else{logger.info("System in pure transformations mode.");}
 		warnIfGapAndCollapseAreInconsistent(collapseMode,gapToolBox);
 		
-		teSystemEnvironment = new TESystemEnvironment(ruleBasesToRetrieveMultiWords, mleEstimation, syncAnnotator, pluginRegistry, featureVectorStructureOrganizer, alignmentCriteria, stopWords,parserMode, collapseMode, gapToolBox, classifierFactory);
+		TextTreesProcessorFactory textTreesProcessorFactory = new TextTreesProcessorFactory(configurationParams);
+		
+		teSystemEnvironment = new TESystemEnvironment(ruleBasesToRetrieveMultiWords, mleEstimation, syncAnnotator, pluginRegistry, featureVectorStructureOrganizer, alignmentCriteria, stopWords,parserMode, collapseMode, gapToolBox, classifierFactory, textTreesProcessorFactory);
 	}
 	
 	protected void completeInitializationWithScript(RuleBasesAndPluginsContainer<?, ?> script) throws TeEngineMlException

@@ -10,7 +10,6 @@ import eu.excitementproject.eop.biutee.classifiers.ClassifierException;
 import eu.excitementproject.eop.biutee.classifiers.LinearClassifier;
 import eu.excitementproject.eop.biutee.rteflow.endtoend.TimeStatistics;
 import eu.excitementproject.eop.biutee.rteflow.endtoend.default_impl.DefaultProver;
-import eu.excitementproject.eop.biutee.rteflow.macro.TextTreesProcessorFactory;
 import eu.excitementproject.eop.biutee.rteflow.macro.search.WithStatisticsTextTreesProcessor;
 import eu.excitementproject.eop.biutee.rteflow.systems.TESystemEnvironment;
 import eu.excitementproject.eop.biutee.script.HypothesisInformation;
@@ -62,7 +61,7 @@ public class RteSumProver extends DefaultProver<RteSumInstance, RteSumProof>
 			mapTreesToSentences.put(instance.getTextTree(), instance.getTextSentence());
 			WithStatisticsTextTreesProcessor processor =
 					//new ExperimentalParametersLocalCreativeTextTreesProcessor(
-					TextTreesProcessorFactory.createProcessor(
+					teSystemEnvironment.getTextTreesProcessorFactory().createProcessor(
 					instance.getTextSentence(), instance.getHypothesisSentence(),
 					Collections.singletonList(instance.getTextTree()),
 					instance.getHypothesisTree(), mapTreesToSentences,
