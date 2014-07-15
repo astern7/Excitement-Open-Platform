@@ -426,6 +426,16 @@ public class ClassifierUtils
 	}
 	
 	
+	public static double getCost(LinearClassifier classifier, Map<Integer,Double> featureVector) throws ClassifierException
+	{
+		return -classifier.getProduct(featureVector);
+	}
+
+	
+	
+	
+	
+	
 
 	
 

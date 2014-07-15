@@ -22,20 +22,26 @@ public class TimeStatistics implements Serializable
 
 	public static TimeStatistics fromTimeElapsedTracker(TimeElapsedTracker tracker, Long numberOfExpandedElements, Long numberOfGeneratedElements)
 	{
+		return fromTimeElapsedTracker(tracker,numberOfExpandedElements,numberOfGeneratedElements,null);
+	}
+	
+	public static TimeStatistics fromTimeElapsedTracker(TimeElapsedTracker tracker, Long numberOfExpandedElements, Long numberOfGeneratedElements, Double cost)
+	{
 		long cputime = tracker.getCpuTimeElapsed();
 		long worldtime = tracker.getWorldClockElapsed();
-		return new TimeStatistics(cputime,worldtime,numberOfExpandedElements,numberOfGeneratedElements);
+		return new TimeStatistics(cputime,worldtime,numberOfExpandedElements,numberOfGeneratedElements,cost);
 	}
 
 	
 	public TimeStatistics(long cpuTimeNanoSeconds, long worldClockTimeMilliSeconds,
-			Long numberOfExpandedElements,Long numberOfGeneratedElements)
+			Long numberOfExpandedElements,Long numberOfGeneratedElements, Double cost)
 	{
 		super();
 		this.cpuTimeNanoSeconds = cpuTimeNanoSeconds;
 		this.worldClockTimeMilliSeconds = worldClockTimeMilliSeconds;
 		this.numberOfExpandedElements = numberOfExpandedElements;
 		this.numberOfGeneratedElements = numberOfGeneratedElements;
+		this.cost = cost;
 	}
 	
 	
@@ -56,7 +62,10 @@ public class TimeStatistics implements Serializable
 	{
 		return numberOfGeneratedElements;
 	}
-	
+	public Double getCost()
+	{
+		return cost;
+	}
 
 	@Override
 	public String toString()
@@ -74,6 +83,10 @@ public class TimeStatistics implements Serializable
 					+ ", Number of generated elements = "
 					+ String.format("%,d",getNumberOfGeneratedElements());
 		}
+		if (cost!=null)
+		{
+			ret = ret + ", Cost = "+String.format("%,f", getCost());
+		}
 		return ret;
 	}
 
@@ -85,4 +98,5 @@ public class TimeStatistics implements Serializable
 	private final long worldClockTimeMilliSeconds;
 	private final Long numberOfExpandedElements;
 	private final Long numberOfGeneratedElements;
+	private final Double cost;
 }

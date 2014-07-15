@@ -106,7 +106,7 @@ public class TextTreesProcessorFactory
 					originalTextTrees,hypothesisTree,originalMapTreesToSentences,
 					coreferenceInformation,classifier,lemmatizer, script,
 					teSystemEnvironment);
-			aStarTextTreesProcessor.setWeightOfFuture(6.0);
+			aStarTextTreesProcessor.setWeightOfFuture(7.0);
 			ret=aStarTextTreesProcessor;
 		}
 		else if ("dovetaling-WA*".equals(searchAlgorithmName))

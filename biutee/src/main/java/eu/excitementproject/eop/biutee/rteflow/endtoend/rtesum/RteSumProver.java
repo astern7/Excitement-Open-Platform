@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import eu.excitementproject.eop.biutee.classifiers.ClassifierException;
+import eu.excitementproject.eop.biutee.classifiers.ClassifierUtils;
 import eu.excitementproject.eop.biutee.classifiers.LinearClassifier;
 import eu.excitementproject.eop.biutee.rteflow.endtoend.TimeStatistics;
 import eu.excitementproject.eop.biutee.rteflow.endtoend.default_impl.DefaultProver;
@@ -77,8 +78,9 @@ public class RteSumProver extends DefaultProver<RteSumInstance, RteSumProof>
 			
 			timeTracker.end();
 			
+			double cost = ClassifierUtils.getCost(classifierForSearch, processor.getBestTree().getFeatureVector());
 			RteSumProof proof = new RteSumProof(processor.getBestTree(),processor.getBestTreeSentence(),processor.getBestTreeHistory(), processor.getGapDescription(),
-					TimeStatistics.fromTimeElapsedTracker(timeTracker,processor.getNumberOfExpandedElements(),processor.getNumberOfGeneratedElements())
+					TimeStatistics.fromTimeElapsedTracker(timeTracker,processor.getNumberOfExpandedElements(),processor.getNumberOfGeneratedElements(),cost)
 					);
 			return proof;
 		}

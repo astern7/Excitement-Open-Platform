@@ -3,6 +3,7 @@ package eu.excitementproject.eop.biutee.rteflow.endtoend.rtrpairs;
 import org.apache.log4j.Logger;
 
 import eu.excitementproject.eop.biutee.classifiers.ClassifierException;
+import eu.excitementproject.eop.biutee.classifiers.ClassifierUtils;
 import eu.excitementproject.eop.biutee.classifiers.LinearClassifier;
 import eu.excitementproject.eop.biutee.rteflow.endtoend.Prover;
 import eu.excitementproject.eop.biutee.rteflow.endtoend.TimeStatistics;
@@ -74,8 +75,10 @@ public class RtePairsProver extends DefaultProver<THPairInstance, THPairProof>
 			
 			timeTracker.end();
 			
+			double cost = ClassifierUtils.getCost(classifierForSearch, processor.getBestTree().getFeatureVector());
+			
 			TimeStatistics timeStatistics = TimeStatistics.fromTimeElapsedTracker(timeTracker,
-					processor.getNumberOfExpandedElements(),processor.getNumberOfGeneratedElements());
+					processor.getNumberOfExpandedElements(),processor.getNumberOfGeneratedElements(),cost);
 			if (logger.isDebugEnabled())
 			{
 				logger.debug("Pair #"+instance.getPairData().getPair().getId()+" done. Time: "+timeStatistics.toString());

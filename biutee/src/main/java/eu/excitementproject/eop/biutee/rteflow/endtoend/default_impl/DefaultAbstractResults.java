@@ -273,6 +273,7 @@ public abstract class DefaultAbstractResults<I extends Instance, P extends Proof
 		long sumWorldTime = 0;
 		long sumExpanded = 0;
 		long sumGenerated = 0;
+		double sumCosts = 0.0;
 		boolean wasNull=false;
 		for (InstanceAndProof<I, P> proof : proofs)
 		{
@@ -283,14 +284,17 @@ public abstract class DefaultAbstractResults<I extends Instance, P extends Proof
 			if (expanded!=null){sumExpanded+=expanded;} else {wasNull=true;}
 			Long generated = ts.getNumberOfGeneratedElements();
 			if (generated!=null){sumGenerated+=generated;} else {wasNull=true;}
+			Double cost = ts.getCost();
+			if (cost!=null) {sumCosts+=cost;}
 		}
 		int amount = proofs.size();
 		Long averageExpanded = wasNull?null:(sumExpanded/amount);
 		Long averageGenerated = wasNull?null:(sumGenerated/amount);
+		Double averageCost = (sumCosts/((double)amount));
 		return new TimeStatistics(
 				sumCpuTime/amount,
 				sumWorldTime/amount,
-				averageExpanded,averageGenerated);
+				averageExpanded,averageGenerated,averageCost);
 	}
 
 	protected final boolean f1_optimized;
