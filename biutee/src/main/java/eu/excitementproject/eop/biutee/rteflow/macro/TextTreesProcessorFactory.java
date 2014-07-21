@@ -100,7 +100,7 @@ public class TextTreesProcessorFactory
 			aStarTextTreesProcessor.setWeightOfFuture(30.0);
 			ret=aStarTextTreesProcessor;
 		}
-		if ("weighted-A*-test-only".equals(searchAlgorithmName))
+		else if ("weighted-A*-test-only".equals(searchAlgorithmName))
 		{
 			AStarTextTreesProcessor aStarTextTreesProcessor = new AStarTextTreesProcessor(textText,hypothesisText,
 					originalTextTrees,hypothesisTree,originalMapTreesToSentences,
